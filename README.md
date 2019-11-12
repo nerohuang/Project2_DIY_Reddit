@@ -1,2 +1,2 @@
-# Project_DIY_Reddit
-Project_DIY_Reddit
+# Project2_DIY_Reddit
+Project2_DIY_Reddit
