@@ -12,7 +12,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 function handleSignUp() {
-  var username = document.getElementById('username').value;
+  var email = document.getElementById('username').value;
   var password = document.getElementById('password').value;
   if (username.length < 4) {
     alert('Please enter an email address.');
@@ -24,7 +24,7 @@ function handleSignUp() {
   }
   // Sign in with email and pass.
   // [START createwithemail]
-  firebase.auth().createUserWithEmailAndPassword(username, password).catch(function(error) {
+  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
@@ -40,9 +40,85 @@ function handleSignUp() {
   // [END createwithemail]
 }
 
+
+function toggleSignIn() {
+      if (firebase.auth().currentUser) {
+        // [START signout]
+        //console.log(user.email);
+        // [END signout]
+      } else {
+        var email = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        if (email.length < 4) {
+          alert('Please enter an email address.');
+          return;
+        }
+        if (password.length < 4) {
+          alert('Please enter a password.');
+          return;
+        }
+        // Sign in with email and pass.
+        // [START authwithemail]
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // [START_EXCLUDE]
+          if (errorCode === 'auth/wrong-password') {
+            alert('Wrong password.');
+          } else {
+            alert(errorMessage);
+          }
+          console.log(error);
+        });
+      }
+      login_done();
+}
+
+function login_done() {
+  firebase.auth().onAuthStateChanged(function(user) {
+    if(user) {
+      var email = user.email;
+      //console.log(email);
+
+      $("#log_acount").hide();
+      $("#init_acc").show();
+      $("#acc_name").text(email);
+    }else {
+      console.log("not");
+    }
+  });
+}
+
+function logout() {
+  firebase.auth().signOut().then(function() {
+  console.log('Signed Out');
+  $("#init_acc").hide();
+  $("#log_acount").show();
+}, function(error) {
+  console.error('Sign Out Error', error);
+});
+}
+
+function googlelogin() {
+  var provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider);
+  login_done();
+}
+
+function githublogin() {
+  var provider = new firebase.auth.GithubAuthProvider();
+  firebase.auth().signInWithPopup(provider);
+  login_done();
+}
+
+window.onload = function() {
+//  $("#init_acc").hide();
+}
+
+
+document.getElementById('login').addEventListener('click',toggleSignIn,false);
 document.getElementById('register').addEventListener('click', handleSignUp, false);
-//$("#register").click(function() {
-  //var username=("#username").val();
-  //var password=("#password").val();
-  //handleSignUp(username, password);
-//});
+document.getElementById('google').addEventListener('click', googlelogin, false);
+document.getElementById('github').addEventListener('click', githublogin, false);
+document.getElementById('logout').addEventListener('click', logout, false);
