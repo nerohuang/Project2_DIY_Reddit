@@ -66,6 +66,8 @@ function toggleSignIn() {
           // [START_EXCLUDE]
           if (errorCode === 'auth/wrong-password') {
             alert('Wrong password.');
+          } else if (errorCode === 'auth/user-not-found') {
+            alert('Your ID and/or Passwork could not be found or are invaild. Please register.');
           } else {
             alert(errorMessage);
           }
@@ -81,9 +83,11 @@ function login_done() {
       var email = user.email;
       //console.log(email);
 
-      $("#log_acount").hide();
-      $("#init_acc").show();
-      $("#acc_name").text(email);
+      //$("#log_acount").hide();
+      //$("#init_acc").show();
+      //$("#acc_name").text(email);
+
+      display_account(email);
     }else {
       console.log("not");
     }
@@ -92,12 +96,16 @@ function login_done() {
 
 function logout() {
   firebase.auth().signOut().then(function() {
-  console.log('Signed Out');
-  $("#init_acc").hide();
-  $("#log_acount").show();
-}, function(error) {
-  console.error('Sign Out Error', error);
-});
+    console.log('Signed Out');
+    //$("#init_acc").hide();
+    //$("#username").val("");
+    //$("#password").val("");
+    //$("#log_acount").show();
+
+    display_login();
+    }, function(error) {
+        console.error('Sign Out Error', error);
+  });
 }
 
 function googlelogin() {
@@ -112,13 +120,56 @@ function githublogin() {
   login_done();
 }
 
-window.onload = function() {
-//  $("#init_acc").hide();
+function display_login() {
+  $("#login_element").html(
+  "<label for='uname'><b>Username</b></label>"+
+  "<input type='text' placeholder='Enter Email' id='username' name='uname' required>"+
+  '<label for="psw"><b>Password</b></label>'+
+  '<input type="password" placeholder="Enter Password" id="password" name="psw" required>'+
+  '<button id="login">Login</button>'+
+  '<button id="register">Register</button>');
+  $("#login_element").append('<br>');
+  $("#login_element").append(
+  '<button id="google">Login by Google</button>'+
+  '<button id="github">Login by Github</button>'
+  );
+
+  $("#login").click(function(){
+    toggleSignIn();
+  });
+  $("#register").click(function(){
+    handleSignUp();
+  });
+  $("#google").click(function(){
+    googlelogin();
+  });
+  $("#github").click(function(){
+    githublogin();
+  });
+}
+
+function display_account(username){
+  $("#login_element").html(
+    '<button id="create_topic">Create Topic</button>'+
+    '<label id="acc_name">'+username+' </label>'+
+    '<button id="logout">logout</button>'
+  );
+  $("#logout").click(function(){
+    logout();
+  });
+  $("#create_topic").click(function(){
+    new_topic();
+  });
 }
 
 
-document.getElementById('login').addEventListener('click',toggleSignIn,false);
-document.getElementById('register').addEventListener('click', handleSignUp, false);
-document.getElementById('google').addEventListener('click', googlelogin, false);
-document.getElementById('github').addEventListener('click', githublogin, false);
-document.getElementById('logout').addEventListener('click', logout, false);
+window.onload = function() {
+  display_login();
+}
+
+
+//document.getElementById('login').addEventListener('click',toggleSignIn,false);
+//document.getElementById('register').addEventListener('click', handleSignUp, false);
+//document.getElementById('google').addEventListener('click', googlelogin, false);
+//document.getElementById('github').addEventListener('click', githublogin, false);
+//document.getElementById('logout').addEventListener('click', logout, false);

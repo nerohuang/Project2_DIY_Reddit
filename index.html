@@ -6,27 +6,15 @@
   <title>Welcome to Reddit</title>
 </head>
 
-
-
-
 <body>
-
-  <div id="log_acount" align="right">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" id="username" name="uname" required>
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" id="password" name="psw" required>
-    <button id="login">Login</button>
-    <button id="register">Register</button>
-    <button id="google">Login by Google</button>
-    <button id="github">Login by Github</button>
+  <div id="title" class="left">
+    <h1>Reddit</h1>
+  </div>
+  <div id="login_element" align="right">
   </div>
 
-  <div id="init_acc" align="right" style="display: none;">
-    <label id="acc_name"></label>
-    <button id="logout">logout</button>
+  <div id="topic">
   </div>
-
 
 
 
@@ -37,7 +25,9 @@
 <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-auth.js"></script>
 <script src='https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script  src="./script.js"></script>
+<script  src="./login.js"></script>
+<script  src="./topic.js"></script>
+<!-- partial -->
 
 </body>
 </html>
