@@ -163,9 +163,9 @@ function display_account(username){
 }
 
 
-window.onload = function() {
-  display_login();
-}
+display_post();
+display_login();
+
 
 
 //document.getElementById('login').addEventListener('click',toggleSignIn,false);
