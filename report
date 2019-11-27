@@ -1,0 +1,27 @@
+Project 1: DIY Reddit report
+Xingyu Huang
+My project is a DIY Reddit report game running on website.
+
+You can go to https://diy-reddit-e68db.web.app/ to use it.
+GitHub address: https://github.com/nerohuang/Project2_DIY_Reddit
+
+I worked with myself and I took like 35 hours to finished it.
+
+The 'a-ha' moment was I finally figure out how to push the new data to the database
+and figure the whole database sturcture. And also know how to avoid hard-code And
+use JSON object to load lots of data.
+
+I wish I could improve my programming part. Although I finished the program,
+I use lots of stupid ways and make code looks very bloated.
+I hope I can writethe code more cleanly and beautifully.
+
+I also want to add some CSS to make UI more beautiful, and add the manage system
+at the same time.
+
+I think I need more 5 to 10 hours to finish the imporve.
+
+The overall impression of the experience is very great for me. Because I can
+already use firebase skillfully, it will help me a lot at the furture. I think
+I will use this knowledge to make some small project at the vacation.
+
+The skill I need to improve still is programming skill.
