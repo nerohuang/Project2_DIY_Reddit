@@ -1,4 +1,5 @@
-function enter_reply(post_id){
+function reply_reply_push(reply_user, post_id){
+  console.log("function good");
   var post_ref = firebase.database().ref().child("posts").child(post_id);
   //console.log(post_id);
 
@@ -20,16 +21,16 @@ function enter_reply(post_id){
     post_reply = post_details.reply;
   });
 
-  $("#enter_reply").html("");
-  $("#enter_reply").html(
-    "<textarea id='reply_content' cols='50' rows='10'>Please enter here....</textarea>"+
+  $("#reply_reply_text").html("");
+  $("#reply_reply_text").html(
+    "<textarea id='reply_content' cols='50' rows='10'>@"+ reply_user +":</textarea>"+
     "<br>"+
     "<button id='submit_reply'>Submit</button>"+
     "<button id='cancel'>Cacnel</button>"
   );
 
   $("#cancel").click(function(){
-    $("#enter_reply").html("");
+    $("#reply_reply_text").html("");
   });
 
   $("#submit_reply").click(function(){
@@ -48,7 +49,7 @@ function enter_reply(post_id){
       dislike: 0
     });
 
-    $("#enter_reply").html("");
+    $("#reply_reply_text").html("");
 
     //console.log(post_like);
     //title, content, id, like, dislike, post_id, reply_content
