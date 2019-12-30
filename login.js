@@ -1,16 +1,3 @@
-// Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: "AIzaSyBBCqy1OyAPC9fDwN-l9aw6V3E3SFJhGo8",
-  authDomain: "diy-reddit-e68db.firebaseapp.com",
-  databaseURL: "https://diy-reddit-e68db.firebaseio.com",
-  projectId: "diy-reddit-e68db",
-  storageBucket: "diy-reddit-e68db.appspot.com",
-  messagingSenderId: "787308605872",
-  appId: "1:787308605872:web:b43ee0063485f9ef4ba675"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
 function handleSignUp() {
   var email = document.getElementById('username').value;
   var password = document.getElementById('password').value;
